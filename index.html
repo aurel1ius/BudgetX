@@ -120,6 +120,8 @@ nav.drag .ind{transition:width .2s}
 .item.rec .amt{white-space:nowrap}
 .item .act{flex:1 0 100%;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding-left:20px}
 .item .act:empty{display:none}
+.clip1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .grow{min-width:0}
 .catdetail{flex-basis:100%;border-top:1px dashed var(--line);margin-top:2px;padding:4px 0 0 4px}
 .catdetail h4{margin:8px 0 0;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .catdetail .item{padding:8px 0}
@@ -604,7 +606,7 @@ function txMenu(t, where) {
 function txRow(t, where, showDate) {
   const sub = isSav(t) ? `Savings · ${t.dir === 'wd' ? 'from' : 'to'} ${goalName(t)}` : t.cat;
   return `<div class="item rec"><span class="dot" style="background:${esc(txColor(t))}"></span>
-    <div class="grow"><div>${esc(t.note || (isSav(t) ? goalName(t) : t.cat))}</div><div class="small muted">${esc(sub)}${showDate ? ' · ' + esc(dayLabel(t.date)) : ''}${t.recId ? ' · recurring' : ''}</div></div>
+    <div class="grow"><div class="clip1" data-act="note-toggle">${esc(t.note || (isSav(t) ? goalName(t) : t.cat))}</div><div class="small muted">${esc(sub)}${showDate ? ' · ' + esc(dayLabel(t.date)) : ''}${t.recId ? ' · recurring' : ''}</div></div>
     <span class="amt ${amtCls(t)}">${sgn(t)}${esc(fmt(t.amount))}</span>${txMenu(t, where)}</div>`;
 }
 function payModal() {
@@ -693,7 +695,7 @@ function catRow(c, inc, got) {
   const cls = !lim ? '' : v > lim ? 'over' : v > lim * .8 ? 'warn' : '';
   const right = inc ? `${fmt0(v)} received` : `${fmt0(v)}${lim ? ` of ${fmt0(lim)}` : ' spent'}`;
   return `<div class="item" style="flex-wrap:wrap"><span class="dot" style="background:${esc(catColor(c))};width:14px;height:14px"></span>
-    <div class="grow clickable" style="flex:1 1 0;min-width:0" data-act="cat-detail" data-c="${esc(c)}" role="button" tabindex="0" aria-expanded="${ui.openCat === c}"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c)}</div>${note ? `<div class="small muted">${esc(note)}</div>` : ''}</div>
+    <div class="grow clickable" style="flex:1 1 0;min-width:0" data-act="cat-detail" data-c="${esc(c)}" role="button" tabindex="0" aria-expanded="${ui.openCat === c}"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c)}</div>${note ? `<div class="small muted ${ui.openCat === c ? '' : 'clip1'}">${esc(note)}</div>` : ''}</div>
     <span class="small muted" style="font-weight:500;white-space:nowrap;flex:none;font-size:12.5px">${esc(right)}</span>
     <div class="menuwrap"><button class="btn ghost sm" data-act="cat-menu" data-c="${esc(c)}" aria-label="Options for ${esc(c)}" aria-haspopup="menu" aria-expanded="${open}" style="padding:4px 8px"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
       ${open ? `<div class="menu" role="menu"><button role="menuitem" data-act="cat-edit" data-c="${esc(c)}">Edit</button><button role="menuitem" class="danger" data-act="del-cat" data-c="${esc(c)}">${ui.delCat === c ? 'Tap again to delete' : 'Delete'}</button></div>` : ''}</div>
@@ -831,7 +833,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Budget Goblin · v1.0.2</div>`);
+    <div class="small muted" style="text-align:center">Budget Goblin · v1.0.4</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -1052,7 +1054,7 @@ function render() {
   const html = `
     <div class="top"><h1>Budget Goblin</h1>
       <button class="btn iconbtn" data-act="cfg" aria-label="Settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-    ${keepNav ? '' : '<nav></nav>'}
+    ${keepNav ? '<!--nav-->' : '<nav></nav>'}
     ${showMonth ? `<div class="monthrow">${monthNav(ui.month, 'm')}</div>` : ''}
     ${dueBanner()}
     ${S.sample ? `<div class="banner"><span>You are looking at sample data.</span><button class="btn sm" data-act="fresh">Start fresh</button></div>` : ''}
@@ -1066,7 +1068,7 @@ function render() {
     ${ui.delay ? delayModal() : ''}
     ${ui.reopen ? reopenModal() : ''}
     ${ui.catModal ? catModal() : ''}`;
-  if (keepNav) { [...app.children].forEach(c => { if (c !== keepNav) c.remove(); }); app.insertAdjacentHTML('afterbegin', html); }
+  if (keepNav) { [...app.children].forEach(c => { if (c !== keepNav) c.remove(); }); const [pre, post] = html.split('<!--nav-->'); keepNav.insertAdjacentHTML('beforebegin', pre); keepNav.insertAdjacentHTML('afterend', post); }
   else app.innerHTML = html;
   app.querySelectorAll('form').forEach(fm => { fm.noValidate = true; });
   app.classList.toggle('enter', lastTab !== null && lastTab !== ui.tab); lastTab = ui.tab;
@@ -1116,6 +1118,7 @@ app.addEventListener('click', e => {
   }
   else if (a === 'cat-type') { ui.cat.type = d.t; ui.cat.err = ''; }
   else if (a === 'ov-chart') ui.ovChart = d.m;
+  else if (a === 'note-toggle') { b.classList.toggle('clip1'); return; }
   else if (a === 'cat-menu') ui.menuCat = ui.menuCat === d.c ? null : d.c;
   else if (a === 'cat-edit') {
     const col = catColor(d.c); ui.menuCat = null; ui.catModal = true;
