@@ -44,7 +44,7 @@ img{max-width:100%}
   --surface2:rgba(150,165,180,.16); --line:rgba(160,175,190,.2); --field:rgba(255,255,255,.07); --shadow:0 10px 34px rgba(0,0,0,.45);
   --accent:#4BD6AA; --accent-ink:#06231A; --accent-soft:rgba(75,214,170,.2); --pos:#4ADE9A; --neg:#FB923C; --warn:#F5C451; --sav:#8FA9F5; --gold:#F2C14E; --gold-soft:rgba(242,193,78,.14);
   --blob1:rgba(20,140,120,.45); --blob2:rgba(70,80,200,.38); --blob3:rgba(190,100,60,.28); color-scheme:dark}
-body{background-color:var(--bg);
+body{-webkit-tap-highlight-color:transparent;background-color:var(--bg);
   background-image:radial-gradient(60% 45% at 12% 8%,var(--blob1),transparent 70%),radial-gradient(55% 45% at 92% 18%,var(--blob2),transparent 70%),radial-gradient(70% 50% at 55% 100%,var(--blob3),transparent 70%);
   background-attachment:fixed;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-inline:16px;padding-block:16px 124px;font-variant-numeric:tabular-nums}
 .wrap{max-width:920px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
@@ -78,6 +78,8 @@ nav{transition:background-color .35s}
 nav:has(.navmore.open){background:var(--glass-strong)}
 .navrow button,.pgrid button{flex:1;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;font-size:11px;font-weight:500;background:none;border:0;color:var(--muted);padding:9px 2px 8px;border-radius:999px;cursor:pointer;transition:color .25s,background-color .25s}
 .navrow button svg,.pgrid button svg{display:block;flex:none}
+nav,nav button{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+nav button:focus{outline:none}
 .navrow button[aria-current="true"],.navrow button.opened,.pgrid button.cur{color:var(--accent)}
 .pgrid button.cur{background:var(--accent-soft)}
 nav.drag .navrow button[aria-current="true"]:not(.hov){color:var(--muted)}
@@ -223,7 +225,16 @@ option.dim{color:#8a948f}
 .lbar{position:relative;width:30px;border-radius:16px;touch-action:none;cursor:ns-resize;box-shadow:inset 0 0 0 1px var(--line)}
 .knob{position:absolute;width:20px;height:20px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.3);transform:translate(-50%,-50%);pointer-events:none}
 .empty{padding:20px 0;text-align:center}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@keyframes viewin{from{opacity:0;transform:translateY(10px)}}
+@keyframes fadein{from{opacity:0}}
+@keyframes sheetup{from{opacity:0;transform:translateY(24px) scale(.97)}}
+#app.enter>:not(nav):not(.top):not(.overlay){animation:viewin .32s cubic-bezier(.2,.8,.3,1) backwards}
+#app.enter>:nth-child(n+5):not(nav):not(.top):not(.overlay){animation-delay:.03s}
+#app.enter>:nth-child(n+7):not(nav):not(.top):not(.overlay){animation-delay:.06s}
+.overlay.fresh{animation:fadein .22s ease backwards}
+.overlay.fresh>.modal{animation:sheetup .38s cubic-bezier(.2,1.15,.4,1) backwards}
+@media(prefers-reduced-motion:reduce){#app.enter>*,.overlay.fresh,.overlay.fresh>.modal{animation:none!important}}
+
 </style>
 
 <div class="wrap" id="app"></div>
@@ -808,7 +819,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Pocket Ledger · version 36</div>`);
+    <div class="small muted" style="text-align:center">Pocket Ledger · version 37</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -1006,10 +1017,11 @@ function tabsModal() {
       <button class="btn ghost sm" data-act="tab-up" data-k="${k}" ${i === 0 ? 'disabled' : ''} aria-label="Move ${esc(tabLabel(k))} up" style="padding:4px 10px">↑</button><button class="btn ghost sm" data-act="tab-down" data-k="${k}" ${i === ord.length - 1 ? 'disabled' : ''} aria-label="Move ${esc(tabLabel(k))} down" style="padding:4px 10px">↓</button></div>`).join('')}</div>
     <div><button class="btn sm" data-act="tabs-reset" type="button">Reset order</button></div></div></div>`;
 }
+let lastTab = null;
 function render() {
   memo = new Map();
   { const th = S.theme; if (th === 'light' || th === 'dark') document.documentElement.dataset.theme = th; else delete document.documentElement.dataset.theme; }
-  const oldModal = app.querySelector('.modal'), keep = oldModal ? oldModal.scrollTop : 0, keepNav = app.querySelector('nav');
+  const oldModal = app.querySelector('.modal'), keep = oldModal ? oldModal.scrollTop : 0, keepNav = app.querySelector('nav'), prevLabels = new Set([...app.querySelectorAll('.modal')].map(m => m.getAttribute('aria-label')));
   const showMonth = ['overview', 'activity', 'budgets'].includes(ui.tab);
   const view = { overview: vOverview, activity: vActivity, budgets: vBudgets, calendar: vCalendar, goals: vGoals, split: vSplit }[ui.tab]();
   app.innerHTML = `
@@ -1030,6 +1042,8 @@ function render() {
     ${ui.reopen ? reopenModal() : ''}
     ${ui.catModal ? catModal() : ''}`;
   app.querySelectorAll('form').forEach(fm => { fm.noValidate = true; });
+  app.classList.toggle('enter', lastTab !== null && lastTab !== ui.tab); lastTab = ui.tab;
+  app.querySelectorAll('.overlay').forEach(o => { const m = o.querySelector('.modal'); if (m && !prevLabels.has(m.getAttribute('aria-label'))) o.classList.add('fresh'); });
   if (keepNav) app.querySelector('nav').replaceWith(keepNav);
   updateNav();
   if (ui.justDone) requestAnimationFrame(() => { const el = app.querySelector('.card.just'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
