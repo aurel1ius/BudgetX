@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0A7F69">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Ledger">
+<meta name="apple-mobile-web-app-title" content="Budget Goblin">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -17,7 +17,7 @@ html,body{margin:0}
 img{max-width:100%}
 [hidden]{display:none!important}
 </style>
-<title>Pocket Ledger</title>
+<title>Budget Goblin</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=DM+Sans:wght@400;500;700&display=swap">
 <style>
 /* Liquid glass: translucent blurred panels with a specular top edge over soft colour fields. */
@@ -796,6 +796,7 @@ function vSplit() {
     ? `<div class="item"><div class="grow"><div>${esc(x.desc)}</div><div class="small muted">${esc(pn(x.payer))} paid · split ${x.with.length} way${x.with.length > 1 ? 's' : ''} · ${esc(dayLabel(x.date))}</div></div><span class="amt">${esc(fmt(x.amount))}</span><button class="btn ghost sm" data-act="del-split" data-id="${x.id}">Delete</button></div>`
     : `<div class="item"><div class="grow"><div>${esc(pn(x.from))} paid ${esc(pn(x.to))}</div><div class="small muted">Settlement · ${esc(dayLabel(x.date))}</div></div><span class="amt pos">${esc(fmt(x.amount))}</span><button class="btn ghost sm" data-act="del-split" data-id="${x.id}">Delete</button></div>`).join('');
   return `
+  <div class="banner" role="note"><span><strong>Split is still in progress.</strong> It doesn't work yet, so don't rely on it.</span></div>
   <div class="grid2">
     <div class="card"><h2>Balances</h2><div class="list">${S.people.map(p => { const v = round2(b[p.id]); return `<div class="item"><div class="grow">${esc(p.name)}</div><span class="amt ${v > 0 ? 'pos' : v < 0 ? 'neg' : 'muted'}">${v > 0 ? 'is owed ' : v < 0 ? 'owes ' : 'settled '}${v ? esc(fmt(Math.abs(v))) : ''}</span></div>`; }).join('')}</div></div>
     <div class="card"><h2>Settle up</h2>${steps.length ? `<div class="list">${steps.map(s => `<div class="item"><div class="grow">${esc(pn(s.from))} pays ${esc(pn(s.to))}</div><span class="amt">${esc(fmt(s.amount))}</span><button class="btn sm" data-act="settle" data-from="${s.from}" data-to="${s.to}" data-amt="${s.amount}">Record</button></div>`).join('')}</div>` : empty('Everyone is even.')}</div>
@@ -830,7 +831,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Pocket Ledger · version 48</div>`);
+    <div class="small muted" style="text-align:center">Budget Goblin · v1.0.2</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -1049,7 +1050,7 @@ function render() {
   const showMonth = ['overview', 'activity', 'budgets'].includes(ui.tab);
   const view = { overview: vOverview, activity: vActivity, budgets: vBudgets, calendar: vCalendar, goals: vGoals, split: vSplit }[ui.tab]();
   const html = `
-    <div class="top"><h1>Pocket Ledger</h1>
+    <div class="top"><h1>Budget Goblin</h1>
       <button class="btn iconbtn" data-act="cfg" aria-label="Settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
     ${keepNav ? '' : '<nav></nav>'}
     ${showMonth ? `<div class="monthrow">${monthNav(ui.month, 'm')}</div>` : ''}
@@ -1277,7 +1278,7 @@ app.addEventListener('submit', e => {
       const o = JSON.parse(v('json'));
       if (!o || !Array.isArray(o.txns) || !Array.isArray(o.cats)) throw 0;
       S = Object.assign(blank(), o, { sample: false }); ui.msg = ''; ui.settings = false; ui.sub = null;
-    } catch (err) { ui.msg = 'That does not look like a Pocket Ledger backup.'; }
+    } catch (err) { ui.msg = 'That does not look like a Budget Goblin backup.'; }
   }
   commit();
 });
@@ -1372,7 +1373,7 @@ function dueText(list) {
   return list.slice(0, 3).map(part).join(', ') + (list.length > 3 ? ` +${list.length - 3} more` : '');
 }
 function sendNotif(body) {
-  const title = 'Pocket Ledger';
+  const title = 'Budget Goblin';
   try {
     if (navigator.serviceWorker && navigator.serviceWorker.getRegistration) {
       navigator.serviceWorker.getRegistration().then(reg => { if (reg && reg.showNotification) reg.showNotification(title, { body, tag: 'pl-due', icon: 'icon-192.png' }); else new Notification(title, { body, tag: 'pl-due' }); }).catch(() => { try { new Notification(title, { body }); } catch (e) {} });

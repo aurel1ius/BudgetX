@@ -1,6 +1,6 @@
 {
-  "name": "Pocket Ledger",
-  "short_name": "Ledger",
+  "name": "Budget Goblin",
+  "short_name": "Goblin",
   "description": "Private budgeting: spending, budgets, recurring payments, goals and splits.",
   "start_url": "./",
   "scope": "./",
