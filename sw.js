@@ -1,5 +1,5 @@
 // Pocket Ledger service worker: cache the app so it opens offline, refresh it in the background.
-const CACHE = 'pocket-ledger-v33';
+const CACHE = 'pocket-ledger-v34';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
@@ -11,6 +11,16 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
+  if (req.mode === 'navigate') {
+    e.respondWith(caches.open(CACHE).then(async cache => {
+      try {
+        const res = await Promise.race([fetch(req), new Promise((_, rej) => setTimeout(rej, 3000))]);
+        if (res && res.ok) { cache.put(req, res.clone()); return res; }
+      } catch (err) {}
+      return (await cache.match(req, { ignoreSearch: true })) || (await cache.match('index.html')) || Response.error();
+    }));
+    return;
+  }
   e.respondWith(caches.open(CACHE).then(async cache => {
     const hit = await cache.match(req, { ignoreSearch: true });
     const net = fetch(req).then(res => { if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone()); return res; }).catch(() => null);
