@@ -580,7 +580,7 @@ function vOverview() {
     ${proj}
   </div>
   <div class="grid2">
-    <div class="card" id="ovcard"><div class="row"><h2 id="ovtitle">${ui.ovChart === 'inc' ? 'Where it came from' : 'Where it went'}</h2><div class="chips" role="group" aria-label="Chart type"><button class="btn sm ${ui.ovChart === 'inc' ? '' : 'primary'}" data-act="ov-chart" data-m="spend" aria-pressed="${ui.ovChart !== 'inc'}">Spending</button><button class="btn sm ${ui.ovChart === 'inc' ? 'primary' : ''}" data-act="ov-chart" data-m="inc" aria-pressed="${ui.ovChart === 'inc'}">Income</button></div></div>
+    <div class="card" id="ovcard"><div class="row" style="flex-wrap:nowrap"><h2 id="ovtitle" class="clip1" style="min-width:0;flex:1 1 auto;font-size:15px">${ui.ovChart === 'inc' ? 'Income' : 'Where it went'}</h2><div class="chips" role="group" aria-label="Chart type" style="flex:none;flex-wrap:nowrap"><button class="btn sm ${ui.ovChart === 'inc' ? '' : 'primary'}" data-act="ov-chart" data-m="spend" aria-pressed="${ui.ovChart !== 'inc'}">Spending</button><button class="btn sm ${ui.ovChart === 'inc' ? 'primary' : ''}" data-act="ov-chart" data-m="inc" aria-pressed="${ui.ovChart === 'inc'}">Income</button></div></div>
       <div class="chartstack">
         <div class="cv ${ui.ovChart === 'inc' ? '' : 'on'}" data-cv="spend">${cats.length ? `<div class="chartrow">${donut(cats, exp + (svd > 0 ? svd : 0))}<div class="legend">${cats.slice(0, 7).map(([n, v, col]) => `<div><span class="dot" style="background:${col || catColor(n)}"></span>${esc(n)}<span class="n">${esc(fmt0(v))}</span></div>`).join('')}</div></div>` : empty('No spending logged this month.')}</div>
         <div class="cv ${ui.ovChart === 'inc' ? 'on' : ''}" data-cv="inc">${incCats.length ? `<div class="chartrow">${donut(incCats, inc, 'Income')}<div class="legend">${incCats.slice(0, 7).map(([n, v, col]) => `<div><span class="dot" style="background:${col}"></span>${esc(n)}<span class="n">${esc(fmt0(v))}</span></div>`).join('')}</div></div>` : empty('No income logged this month.')}</div>
@@ -1129,7 +1129,7 @@ app.addEventListener('click', e => {
     const card = app.querySelector('#ovcard'); if (card) {
       card.querySelectorAll('.cv').forEach(v => v.classList.toggle('on', v.dataset.cv === d.m));
       card.querySelectorAll('[data-act=ov-chart]').forEach(x => { const on = x.dataset.m === d.m; x.classList.toggle('primary', on); x.setAttribute('aria-pressed', String(on)); });
-      const t = card.querySelector('#ovtitle'); if (t) t.textContent = d.m === 'inc' ? 'Where it came from' : 'Where it went';
+      const t = card.querySelector('#ovtitle'); if (t) t.textContent = d.m === 'inc' ? 'Income' : 'Where it went';
       return;
     }
   }
