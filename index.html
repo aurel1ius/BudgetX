@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#0A7F69">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -27,7 +27,7 @@ img{max-width:100%}
   --surface:var(--glass); --surface2:rgba(110,125,140,.16); --line:rgba(110,125,140,.24);
   --field:rgba(255,255,255,.45); --shadow:0 10px 34px rgba(30,50,70,.14);
   --accent:#0A7F69; --accent-ink:#FFFFFF; --accent-soft:rgba(14,160,130,.18);
-  --pos:#18794E; --neg:#C2410C; --warn:#A16207; --sav:#3F63C4; --gold:#B7860F; --gold-soft:rgba(228,176,48,.16);
+  --pos:#18794E; --neg:#D1323A; --warn:#A16207; --sav:#3F63C4; --gold:#B7860F; --gold-soft:rgba(228,176,48,.16);
   --blob1:rgba(60,200,170,.50); --blob2:rgba(110,130,255,.42); --blob3:rgba(255,170,120,.38);
   --f-display:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;
   --f-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -36,22 +36,22 @@ img{max-width:100%}
   --bg:#0A1014; --ink:#E8F1ED; --muted:#9BAEA6;
   --glass:rgba(34,46,56,.46); --glass-strong:rgba(46,60,72,.7); --glass-edge:rgba(255,255,255,.2);
   --surface2:rgba(150,165,180,.16); --line:rgba(160,175,190,.2); --field:rgba(255,255,255,.07); --shadow:0 10px 34px rgba(0,0,0,.45);
-  --accent:#4BD6AA; --accent-ink:#06231A; --accent-soft:rgba(75,214,170,.2); --pos:#4ADE9A; --neg:#FB923C; --warn:#F5C451; --sav:#8FA9F5; --gold:#F2C14E; --gold-soft:rgba(242,193,78,.14);
+  --accent:#4BD6AA; --accent-ink:#06231A; --accent-soft:rgba(75,214,170,.2); --pos:#4ADE9A; --neg:#FF6B6B; --warn:#F5C451; --sav:#8FA9F5; --gold:#F2C14E; --gold-soft:rgba(242,193,78,.14);
   --blob1:rgba(20,140,120,.45); --blob2:rgba(70,80,200,.38); --blob3:rgba(190,100,60,.28); color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#0A1014; --ink:#E8F1ED; --muted:#9BAEA6;
   --glass:rgba(34,46,56,.46); --glass-strong:rgba(46,60,72,.7); --glass-edge:rgba(255,255,255,.2);
   --surface2:rgba(150,165,180,.16); --line:rgba(160,175,190,.2); --field:rgba(255,255,255,.07); --shadow:0 10px 34px rgba(0,0,0,.45);
-  --accent:#4BD6AA; --accent-ink:#06231A; --accent-soft:rgba(75,214,170,.2); --pos:#4ADE9A; --neg:#FB923C; --warn:#F5C451; --sav:#8FA9F5; --gold:#F2C14E; --gold-soft:rgba(242,193,78,.14);
+  --accent:#4BD6AA; --accent-ink:#06231A; --accent-soft:rgba(75,214,170,.2); --pos:#4ADE9A; --neg:#FF6B6B; --warn:#F5C451; --sav:#8FA9F5; --gold:#F2C14E; --gold-soft:rgba(242,193,78,.14);
   --blob1:rgba(20,140,120,.45); --blob2:rgba(70,80,200,.38); --blob3:rgba(190,100,60,.28); color-scheme:dark}
 body{-webkit-tap-highlight-color:transparent;background-color:var(--bg);
-  background-image:radial-gradient(60% 45% at 12% 8%,var(--blob1),transparent 70%),radial-gradient(55% 45% at 92% 18%,var(--blob2),transparent 70%),radial-gradient(70% 50% at 55% 100%,var(--blob3),transparent 70%);
-  background-attachment:fixed;color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-inline:16px;padding-block:16px 124px;font-variant-numeric:tabular-nums}
+color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45;padding-inline:16px;padding-block:16px 124px;font-variant-numeric:tabular-nums}
+.bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;transform:translateZ(0);background-image:radial-gradient(60% 45% at 12% 8%,var(--blob1),transparent 70%),radial-gradient(55% 45% at 92% 18%,var(--blob2),transparent 70%),radial-gradient(70% 50% at 55% 100%,var(--blob3),transparent 70%)}
 .wrap{max-width:920px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
 h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
 h1{font-size:26px} h2{font-size:18px} h3{font-size:15px}
 .muted{color:var(--muted)} .small{font-size:13px}
-.glass,.card,.tile,.banner,.modal,nav,.btn,.cal button{-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%)}
+nav,.modal{-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%)}
 .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .top{flex-wrap:nowrap}
 .btn.iconbtn{width:44px;height:44px;padding:0;display:grid;place-items:center;border-radius:50%;flex:none;box-shadow:inset 0 1px 0 var(--glass-edge),inset 0 0 0 1px var(--line),0 4px 14px rgba(30,50,70,.12)}
@@ -67,7 +67,7 @@ h1{font-size:26px} h2{font-size:18px} h3{font-size:15px}
 .btn.primary{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 88%,#fff),var(--accent));color:var(--accent-ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 4px 14px color-mix(in srgb,var(--accent) 40%,transparent)}
 .btn.primary:hover{filter:brightness(1.06)}
 .btn.sm{padding:4px 12px;min-height:32px;font-size:13px}
-.btn.ghost{background:none;box-shadow:none;color:var(--muted);-webkit-backdrop-filter:none;backdrop-filter:none}
+.btn.ghost{background:none;box-shadow:none;color:var(--muted)}
 .btn.ghost:hover{background:var(--surface2)}
 .btn.danger{color:var(--neg)}
 button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -78,6 +78,7 @@ nav{transition:background-color .35s}
 nav:has(.navmore.open){background:var(--glass-strong)}
 .navrow button,.pgrid button{flex:1;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;font-size:11px;font-weight:500;background:none;border:0;color:var(--muted);padding:9px 2px 8px;border-radius:999px;cursor:pointer;transition:color .25s,background-color .25s}
 .navrow button svg,.pgrid button svg{display:block;flex:none}
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
 nav,nav button{-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
 nav button:focus{outline:none}
 .navrow button[aria-current="true"],.navrow button.opened,.pgrid button.cur{color:var(--accent)}
@@ -157,6 +158,9 @@ nav.drag .ind{transition:width .2s}
 .pill.ok{background:var(--accent-soft);color:var(--accent)}
 .pill.late{color:var(--neg)}
 .daytitle{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding-top:10px}
+form.f>*,.f>*{min-width:0}
+input[type=date]{min-width:0;width:100%;max-width:100%;-webkit-appearance:none;appearance:none;text-align:left}
+input[type=date]::-webkit-date-and-time-value{text-align:left;min-height:1.2em}
 form.f{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;align-items:end}
 label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:500;color:var(--muted);min-width:0}
 input,select,textarea{font:inherit;color:var(--ink);background:var(--field);border:0;box-shadow:inset 0 0 0 1px var(--line),inset 0 1px 2px rgba(0,0,0,.05);border-radius:14px;padding:8px 12px;min-height:40px;width:100%;box-sizing:border-box;min-width:0}
@@ -204,7 +208,7 @@ label.check{flex-direction:row;align-items:center;gap:8px;color:var(--ink);font-
 .sec.closed>.inner{opacity:0;overflow:hidden;visibility:hidden;transition:opacity .2s ease,visibility 0s .3s}
 .seg{transition:stroke-width .15s;cursor:pointer}
 .seg:hover{stroke-width:20}
-.tip{position:fixed;z-index:60;pointer-events:none;padding:6px 10px;border-radius:10px;font-size:13px;font-weight:500;color:var(--ink);background:var(--glass-strong);-webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%);box-shadow:inset 0 0 0 1px var(--line),0 8px 24px rgba(10,20,30,.25);white-space:nowrap;max-width:calc(100vw - 16px)}
+.tip{position:fixed;z-index:60;pointer-events:none;padding:6px 10px;border-radius:10px;font-size:13px;font-weight:500;color:var(--ink);background:var(--glass-strong);box-shadow:inset 0 0 0 1px var(--line),0 8px 24px rgba(10,20,30,.25);white-space:nowrap;max-width:calc(100vw - 16px)}
 .btn:disabled{opacity:.45;cursor:not-allowed;filter:none}
 option.dim{color:#8a948f}
 .scopes{display:flex;flex-direction:column;gap:8px}
@@ -239,6 +243,7 @@ option.dim{color:#8a948f}
 
 </style>
 
+<div class="bgfx" aria-hidden="true"></div>
 <div class="wrap" id="app"></div>
 
 <script>
@@ -433,6 +438,7 @@ const app = document.getElementById('app');
 let searchRaf = 0;
 const commit = () => { autoPost(); saveSoon(); render(); };
 
+const numf = x => parseFloat(String(x).replace(',', '.'));
 const amtStep = () => (S.currency === 'CZK' ? 50 : 5);
 const nfCache = {};
 const fmt = (n, dec = 2) => { const c = S.currency || 'EUR', k = c + dec; return (nfCache[k] || (nfCache[k] = new Intl.NumberFormat(undefined, { style: 'currency', currency: c, minimumFractionDigits: dec, maximumFractionDigits: dec }))).format(n); };
@@ -459,7 +465,7 @@ const goalName = x => (goalOf(x.goal) || {}).name || x.cat || 'Goal';
 const parseCat = val => { const t = val[0], rest = val.slice(2); if (t === 's' || t === 'w') { const g = goalOf(rest); return { type: 'saving', dir: t === 'w' ? 'wd' : 'dep', goal: rest, cat: g ? g.name : '' }; } return { type: t === 'i' ? 'income' : 'expense', cat: rest }; };
 const catKey = x => isSav(x) ? (x.dir === 'wd' ? 'w:' : 's:') + x.goal : (x.type === 'income' ? 'i:' : 'e:') + x.cat;
 const sgn = x => (x.type === 'income' || (isSav(x) && x.dir === 'wd')) ? '+' : '-';
-const amtCls = x => x.type === 'income' ? 'pos' : isSav(x) ? 'sav' : '';
+const amtCls = x => x.type === 'income' ? 'pos' : isSav(x) ? 'sav' : 'neg';
 const txColor = t => t.type === 'income' ? 'var(--accent)' : isSav(t) ? SAVE_COLOR : catColor(t.cat);
 const savDelta = t => isSav(t) ? (t.dir === 'wd' ? -t.amount : t.amount) : 0;
 const goalSaved = g => round2(g.saved + S.txns.reduce((a, t) => t.goal === g.id && counted(t) ? a + savDelta(t) : a, 0));
@@ -501,7 +507,7 @@ function settleSteps() {
 }
 
 /* ---------- charts ---------- */
-function donut(entries, total) {
+function donut(entries, total, label) {
   const hasSav = entries.some(e => e[2]);
   const r = 46, c = 2 * Math.PI * r; let off = 0;
   const segs = entries.map(([name, v, col]) => {
@@ -509,9 +515,9 @@ function donut(entries, total) {
     const s = `<circle class="seg" data-tip="${esc(name)} · ${esc(fmt0(v))} (${Math.round(v / total * 100)}%)" cx="60" cy="60" r="${r}" fill="none" stroke="${col || catColor(name)}" style="stroke:${col || catColor(name)}" stroke-width="16" stroke-dasharray="${len} ${c - len}" stroke-dashoffset="${-off}" transform="rotate(-90 60 60)"/>`;
     off += len; return s;
   }).join('');
-  return `<svg viewBox="0 0 120 120" width="150" height="150" role="img" aria-label="Spending by category">
+  return `<svg viewBox="0 0 120 120" width="150" height="150" role="img" aria-label="${label ? 'Income by category' : 'Spending by category'}">
     <circle cx="60" cy="60" r="${r}" fill="none" stroke="var(--surface2)" stroke-width="16"/>${total ? segs : ''}
-    <text x="60" y="58" text-anchor="middle" class="t" style="font-size:9px">${hasSav ? 'Spent &amp; saved' : 'Spent'}</text>
+    <text x="60" y="58" text-anchor="middle" class="t" style="font-size:9px">${label || (hasSav ? 'Spent &amp; saved' : 'Spent')}</text>
     <text x="60" y="73" text-anchor="middle" style="font-size:13px;font-weight:700;fill:var(--ink)">${esc(fmt0(total))}</text></svg>`;
 }
 function bars() {
@@ -554,6 +560,7 @@ function vOverview() {
     const val = Math.round(lo) === Math.round(hi) ? esc(fmt0(lo)) : `${esc(fmt0(lo))} to ${esc(fmt0(hi))}`;
     proj = `<div class="tile accent"><span class="small muted">Projected month-end${lo === hi ? '' : ' (lowest to highest)'}</span><span class="v" style="font-size:${lo === hi ? 24 : 20}px">${val}</span><span class="small muted">after ${eLo === eHi ? esc(fmt0(eLo)) : esc(fmt0(eLo)) + ' to ' + esc(fmt0(eHi))} of scheduled bills${sLo || sHi ? ' and ' + (sLo === sHi ? esc(fmt0(sLo)) : esc(fmt0(sLo)) + ' to ' + esc(fmt0(sHi))) + ' to savings' : ''}</span></div>`;
   }
+  const incCats = Object.entries(incByCat(k)).sort((a, b) => b[1] - a[1]).map(([n, v], i) => [n, v, (S.catColors && S.catColors[n]) || PAL[i % PAL.length]]);
   const up = upcoming(14).slice(0, 6);
   const over = S.cats.filter(c => S.budgets[c] && (byCat(k)[c] || 0) > S.budgets[c]);
   return `
@@ -565,16 +572,18 @@ function vOverview() {
     ${proj}
   </div>
   <div class="grid2">
-    <div class="card"><h2>Where it went</h2>
-      ${cats.length ? `<div class="chartrow">${donut(cats, exp + (svd > 0 ? svd : 0))}<div class="legend">${cats.slice(0, 7).map(([n, v, col]) => `<div><span class="dot" style="background:${col || catColor(n)}"></span>${esc(n)}<span class="n">${esc(fmt0(v))}</span></div>`).join('')}</div></div>` : empty('No spending logged this month.')}
+    <div class="card"><div class="row"><h2>${ui.ovChart === 'inc' ? 'Where it came from' : 'Where it went'}</h2><div class="chips" role="group" aria-label="Chart type"><button class="btn sm ${ui.ovChart === 'inc' ? '' : 'primary'}" data-act="ov-chart" data-m="spend" aria-pressed="${ui.ovChart !== 'inc'}">Spending</button><button class="btn sm ${ui.ovChart === 'inc' ? 'primary' : ''}" data-act="ov-chart" data-m="inc" aria-pressed="${ui.ovChart === 'inc'}">Income</button></div></div>
+      ${ui.ovChart === 'inc'
+        ? (incCats.length ? `<div class="chartrow">${donut(incCats, inc, 'Income')}<div class="legend">${incCats.slice(0, 7).map(([n, v, col]) => `<div><span class="dot" style="background:${col}"></span>${esc(n)}<span class="n">${esc(fmt0(v))}</span></div>`).join('')}</div></div>` : empty('No income logged this month.'))
+        : (cats.length ? `<div class="chartrow">${donut(cats, exp + (svd > 0 ? svd : 0))}<div class="legend">${cats.slice(0, 7).map(([n, v, col]) => `<div><span class="dot" style="background:${col || catColor(n)}"></span>${esc(n)}<span class="n">${esc(fmt0(v))}</span></div>`).join('')}</div></div>` : empty('No spending logged this month.'))}
     </div>
     <div class="card"><h2>Last six months</h2>${bars()}
       <div class="row small muted"><span><span class="dot" style="background:var(--accent);display:inline-block"></span> Income</span><span><span class="dot" style="background:var(--neg);display:inline-block"></span> Spent</span></div>
     </div>
   </div>
   <div class="grid2">
-    <div class="card"><h2>Coming up, next 14 days</h2>
-      ${up.length ? `<div class="list">${up.map(({ r, d }) => `<div class="item"><div class="grow"><div>${esc(r.name)}</div><div class="small muted">${esc(dayLabel(d))}</div></div><span class="amt ${amtCls(r)}">${sgn(r)}${esc(rfmt(r))}</span>${r.auto ? '<span class="pill">Automatic</span>' : payControls(r, d, 'Mark paid')}</div>`).join('')}</div>` : empty('Nothing scheduled.')}
+    <div class="card" style="position:relative;z-index:${ui.menuRec ? 6 : 'auto'}"><h2>Coming up, next 14 days</h2>
+      ${up.length ? `<div class="list">${up.map(({ r, d }) => `<div class="item"><div class="grow"><div>${esc(r.name)}</div><div class="small muted">${esc(dayLabel(d))}</div></div><span class="amt ${amtCls(r)}">${sgn(r)}${esc(rfmt(r))}</span>${r.auto ? '<span class="pill">Automatic</span>' : ''}${recMenu(r, d, 'up')}</div>`).join('')}</div>` : empty('Nothing scheduled.')}
     </div>
     <div class="card"><h2>Budget check</h2>
       ${over.length ? `<div class="list">${over.map(c => `<div class="item"><span class="dot" style="background:${catColor(c)}"></span><div class="grow">${esc(c)}</div><span class="neg amt">${esc(fmt0((byCat(k)[c] || 0) - S.budgets[c]))} over</span></div>`).join('')}</div>` : empty(Object.keys(S.budgets).length ? 'All categories are within budget.' : 'No limits set.')}
@@ -604,7 +613,7 @@ function payModal() {
     <div class="row"><h2>Amount paid</h2><button class="btn ghost sm" data-act="pay-cancel" type="button">Cancel</button></div>
     <div class="small muted">${esc(r.name)} · ${esc(dayLabel(q.d))}<br>Expected ${esc(rfmt(r))}</div>
     <form class="f" data-form="pay" style="grid-template-columns:1fr">
-      <label>How much was it?<input name="amount" type="number" step="0.01" min="0.01" inputmode="decimal" value="${round2((r.amount + rmax(r)) / 2)}" required></label>
+      <label>How much was it?<input name="amount" type="text" inputmode="decimal" autocomplete="off" value="${round2((r.amount + rmax(r)) / 2)}" required></label>
       <button class="btn primary" type="submit">Confirm</button></form></div></div>`;
 }
 function delayModal() {
@@ -623,7 +632,7 @@ function reopenModal() {
     <div class="row"><h2>Reopen ${esc(g.name)}</h2><button class="btn ghost sm" data-act="reopen-close" type="button">Cancel</button></div>
     <div class="small muted">Did the money in this goal change? Add the deposit or withdrawal now. Or reopen without adding anything.</div>
     <form class="f" data-form="reopen">
-      <label>Amount<input name="amount" type="number" step="${amtStep()}" min="0" inputmode="decimal" required></label>
+      <label>Amount<input name="amount" type="text" inputmode="decimal" autocomplete="off" required></label>
       <label>Category<select name="cat">${catOpts('s:' + g.id).replace('<option value="__new">+ Create category…</option>', '')}</select></label>
       <label>Date<input name="date" type="date" value="${today}" required></label>
       <label>Note<input name="note" maxlength="60" placeholder="Optional"></label>
@@ -635,7 +644,7 @@ function txModal() {
   return `<div class="overlay" data-act="tx-close"><div class="modal" style="max-width:440px" role="dialog" aria-modal="true" aria-label="Edit payment">
     <div class="row"><h2>Edit payment</h2><button class="btn ghost sm" data-act="tx-close" type="button">Cancel</button></div>
     <form class="f" data-form="txedit" style="grid-template-columns:1fr">
-      <label>Amount<input name="amount" type="number" step="${amtStep()}" min="0" inputmode="decimal" value="${esc(t.amount)}" required></label>
+      <label>Amount<input name="amount" type="text" inputmode="decimal" autocomplete="off" value="${esc(t.amount)}" required></label>
       <label>Category<select name="cat">${catOpts(t.cat)}</select></label>
       <label>Date<input name="date" type="date" value="${esc(t.date)}" required></label>
       <label>Note<input name="note" maxlength="60" value="${esc(t.note)}" placeholder="Optional"></label>
@@ -668,7 +677,7 @@ function vActivity() {
   return `
   <div class="card"><h2>Add transaction</h2>
     <form class="f" data-form="tx">
-      <label>Amount<input name="amount" type="number" step="${amtStep()}" min="0" inputmode="decimal" value="${esc(ui.txDraft ? ui.txDraft.amount : '')}" required></label>
+      <label>Amount<input name="amount" type="text" inputmode="decimal" autocomplete="off" value="${esc(ui.txDraft ? ui.txDraft.amount : '')}" required></label>
       <label>Category<select name="cat">${catOpts(ui.txDraft ? ui.txDraft.cat : undefined)}</select></label>
       <label>Date<input name="date" type="date" value="${esc(ui.txDraft ? ui.txDraft.date : today)}" required></label>
       <label>Note<input name="note" maxlength="60" placeholder="Optional" value="${esc(ui.txDraft ? ui.txDraft.note : '')}"></label>
@@ -684,16 +693,16 @@ function catRow(c, inc, got) {
   const cls = !lim ? '' : v > lim ? 'over' : v > lim * .8 ? 'warn' : '';
   const right = inc ? `${fmt0(v)} received` : `${fmt0(v)}${lim ? ` of ${fmt0(lim)}` : ' spent'}`;
   return `<div class="item" style="flex-wrap:wrap"><span class="dot" style="background:${esc(catColor(c))};width:14px;height:14px"></span>
-    <div class="grow clickable" data-act="cat-detail" data-c="${esc(c)}" role="button" tabindex="0" aria-expanded="${ui.openCat === c}"><div>${esc(c)}</div>${note ? `<div class="small muted">${esc(note)}</div>` : ''}</div>
-    <span class="small muted" style="font-weight:500;white-space:nowrap">${esc(right)}</span>
+    <div class="grow clickable" style="flex:1 1 0;min-width:0" data-act="cat-detail" data-c="${esc(c)}" role="button" tabindex="0" aria-expanded="${ui.openCat === c}"><div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(c)}</div>${note ? `<div class="small muted">${esc(note)}</div>` : ''}</div>
+    <span class="small muted" style="font-weight:500;white-space:nowrap;flex:none;font-size:12.5px">${esc(right)}</span>
     <div class="menuwrap"><button class="btn ghost sm" data-act="cat-menu" data-c="${esc(c)}" aria-label="Options for ${esc(c)}" aria-haspopup="menu" aria-expanded="${open}" style="padding:4px 8px"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
       ${open ? `<div class="menu" role="menu"><button role="menuitem" data-act="cat-edit" data-c="${esc(c)}">Edit</button><button role="menuitem" class="danger" data-act="del-cat" data-c="${esc(c)}">${ui.delCat === c ? 'Tap again to delete' : 'Delete'}</button></div>` : ''}</div>
     ${lim ? `<div class="bar ${cls}" style="flex-basis:100%"><i style="width:${pct}%"></i></div>` : ''}
     ${ui.openCat === c ? catDetail(c, inc) : ''}</div>`;
 }
 function catDetail(c, inc) {
-  const ty = inc ? 'income' : 'expense', txs = S.txns.filter(t => t.cat === c && t.type === ty).sort((a, b) => b.date.localeCompare(a.date)), recs = S.recurring.filter(r => r.cat === c && r.type === ty);
-  const recRow = r => `<div class="item rec"><span class="dot" style="background:${esc(recColor(r))}"></span><div class="grow"><div>${esc(r.name)}</div><div class="small muted">${esc(freqLabel(r))} · ${r.auto ? 'automatic' : 'manual'}</div></div><span class="amt ${inc ? 'pos' : ''}">${inc ? '+' : '-'}${esc(rfmt(r))}</span>${recMenu(r, refDate(r), 'cat')}</div>`;
+  const ty = inc ? 'income' : 'expense', txs = S.txns.filter(t => t.cat === c && t.type === ty && !t.recId).sort((a, b) => b.date.localeCompare(a.date)), recs = S.recurring.filter(r => r.cat === c && r.type === ty);
+  const recRow = r => `<div class="item rec"><span class="dot" style="background:${esc(recColor(r))}"></span><div class="grow"><div>${esc(r.name)}</div><div class="small muted">${esc(freqLabel(r))} · ${r.auto ? 'automatic' : 'manual'}</div></div><span class="amt ${inc ? 'pos' : 'neg'}">${inc ? '+' : '-'}${esc(rfmt(r))}</span>${recMenu(r, refDate(r), 'cat')}</div>`;
   return `<div class="catdetail">${!txs.length && !recs.length ? empty('No payments in this category yet.') : ''}
     ${recs.length ? `<h4>Recurring</h4><div class="list">${recs.map(recRow).join('')}</div>` : ''}
     ${txs.length ? `<h4>Logged</h4><div class="list">${txs.map(t => txRow(t, 'cat', true)).join('')}</div>` : ''}</div>`;
@@ -725,7 +734,7 @@ function vCalendar() {
   const dayItems = byDay[ui.day] || [], dayTx = byTx[ui.day] || [];
   const dayHtml = dayItems.length ? `<div class="list">${dayItems.map(r => {
     const paid = isPaid(r.id, ui.day), late = !paid && ui.day < today;
-    return `<div class="item rec"><span class="dot" style="background:${esc(recColor(r))}"></span><div class="grow"><div>${esc(r.name)}</div><div class="small muted">${esc(r.cat)} · ${esc(freqLabel(r))} · ${r.auto ? 'automatic' : 'manual'}</div></div>${isRange(r) ? '' : `<span class="amt ${amtCls(r)}">${sgn(r)}${esc(rfmt(r))}</span>`}${recMenu(r, ui.day, 'day')}<div class="act">${isRange(r) ? `<span class="amt ${amtCls(r)}">${sgn(r)}${esc(rfmt(r))}</span>` : ''}${(() => { const mk = Object.keys(r.moved || {}).find(o => r.moved[o] === ui.day); return mk ? `<span class="pill">Delayed from ${esc(dayLabel(mk))}</span><button class="btn ghost sm" data-act="undelay" data-rec="${r.id}" data-d="${ui.day}">Undo delay</button>` : ''; })()}${paid ? `<span class="pill ok">Logged</span>${r.auto ? '' : `<button class="btn ghost sm" data-act="unpay" data-rec="${r.id}" data-d="${ui.day}">Undo</button>`}` : `${r.auto ? '<span class="pill">Automatic</span>' : payControls(r, ui.day, late ? 'Log now' : 'Mark paid')}<button class="btn ghost sm" data-act="delay" data-rec="${r.id}" data-d="${ui.day}">Delay</button>`}</div></div>`;
+    return `<div class="item rec"><span class="dot" style="background:${esc(recColor(r))}"></span><div class="grow"><div>${esc(r.name)}</div><div class="small muted">${esc(r.cat)} · ${esc(freqLabel(r))} · ${r.auto ? 'automatic' : 'manual'}</div></div>${isRange(r) ? '' : `<span class="amt ${amtCls(r)}">${sgn(r)}${esc(rfmt(r))}</span>`}${recMenu(r, ui.day, 'day')}<div class="act">${isRange(r) ? `<span class="amt ${amtCls(r)}">${sgn(r)}${esc(rfmt(r))}</span>` : ''}${(() => { const mk = Object.keys(r.moved || {}).find(o => r.moved[o] === ui.day); return mk ? `<span class="pill">Delayed from ${esc(dayLabel(mk))}</span>` : ''; })()}${paid ? `<span class="pill ok">Logged</span>` : r.auto ? '<span class="pill">Automatic</span>' : ''}</div></div>`;
   }).join('')}</div>` : '';
   const dayAll = dayHtml + (dayTx.length ? `<h4 class="daytitle">Logged payments</h4><div class="list">${dayTx.map(t => txRow(t, 'cal', false)).join('')}</div>` : '') || empty('Nothing on this day.');
   const recs = S.recurring.slice().sort((a, b) => a.name.localeCompare(b.name));
@@ -759,7 +768,7 @@ function vGoals() {
     return `<div class="card" style="position:relative;z-index:${ui.menuRec && open ? 6 : 'auto'}"><div class="row"><h3>${esc(g.name)}</h3>${delBtn(g)}</div>
       <div class="row"><span class="amt">${esc(fmt0(sv))} <span class="muted" style="font-weight:400">of ${esc(fmt0(g.target))}</span></span><span class="small muted">${Math.round(pct)}%</span></div>
       <div class="bar"><i style="width:${pct}%"></i></div><div class="small muted">${esc(hint)}</div>
-      <form class="f" data-form="contrib" data-id="${g.id}"><label>Move money<input name="amount" type="number" step="${amtStep()}" inputmode="decimal" placeholder="e.g. 50 in, -20 out" required></label><button class="btn" type="submit">Move</button></form>
+      <form class="f" data-form="contrib" data-id="${g.id}"><label>Move money<input name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 50 in, -20 out" required></label><button class="btn" type="submit">Move</button></form>
       <div style="display:flex;gap:8px;flex-wrap:wrap">${showBtn(g, open)}<button class="btn sm" data-act="goal-done" data-id="${g.id}">${star().replace('class="star "', 'class="star" style="margin:0 6px 0 0"')}Completed</button></div>
       ${open ? goalDetail(g) : ''}</div>`;
   }).join('');
@@ -775,8 +784,8 @@ function vGoals() {
   ${doneCards ? `<div class="goalsep">${star().replace('class="star "', 'class="star" style="margin:0"')}<span>Achieved</span>${star().replace('class="star "', 'class="star" style="margin:0"')}</div><div class="grid2">${doneCards}</div>` : ''}
   <div class="card"><h2>New goal</h2><form class="f" data-form="goal">
     <label>Name<input name="name" maxlength="40" required></label>
-    <label>Target<input name="target" type="number" step="1" min="1" inputmode="decimal" required></label>
-    <label>Already saved<input name="saved" type="number" step="1" min="0" inputmode="decimal" value="0"></label>
+    <label>Target<input name="target" type="text" inputmode="decimal" autocomplete="off" required></label>
+    <label>Already saved<input name="saved" type="text" inputmode="decimal" autocomplete="off" value="0"></label>
     <label>Deadline (optional)<input name="deadline" type="date"></label>
     <button class="btn primary" type="submit">Add goal</button></form></div>`;
 }
@@ -793,7 +802,7 @@ function vSplit() {
   </div>
   <div class="card"><h2>Add shared expense</h2><form class="f" data-form="split">
     <label>What for<input name="desc" maxlength="50" required></label>
-    <label>Amount<input name="amount" type="number" step="${amtStep()}" min="0" inputmode="decimal" required></label>
+    <label>Amount<input name="amount" type="text" inputmode="decimal" autocomplete="off" required></label>
     <label>Paid by<select name="payer">${S.people.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('')}</select></label>
     <label>Date<input name="date" type="date" value="${today}" required></label>
     <div class="checks"><span class="small muted" style="width:100%">Split equally between</span>${S.people.map(p => `<label><input type="checkbox" name="with" value="${p.id}" checked>${esc(p.name)}</label>`).join('')}</div>
@@ -821,7 +830,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Pocket Ledger · version 39</div>`);
+    <div class="small muted" style="text-align:center">Pocket Ledger · version 48</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -867,7 +876,7 @@ function catModal() {
     <form class="f" data-form="cat" style="grid-template-columns:1fr">
       <label>Name<input data-cf="name" value="${esc(c.name)}" maxlength="24" placeholder="Pick a preset or type your own" required></label>
       <label>Short note (optional)<input data-cf="note" value="${esc(c.note)}" maxlength="60" placeholder="e.g. weekly shop"></label>
-      ${inc ? '' : `<label>Monthly limit (optional)<input data-cf="limit" type="number" min="0" step="${S.currency === 'CZK' ? 100 : 10}" inputmode="decimal" value="${esc(c.limit)}" placeholder="No limit"></label>`}
+      ${inc ? '' : `<label>Monthly limit (optional)<input data-cf="limit" type="text" inputmode="decimal" autocomplete="off" value="${esc(c.limit)}" placeholder="No limit"></label>`}
       ${colorBlock(c)}
       <div class="small neg">${esc(c.err)}</div>
       <button class="btn primary" type="submit">${c.editing ? 'Save changes' : 'Add category'}</button>
@@ -890,12 +899,23 @@ function refDate(r) {
   const past = occ(r, r.start, today); return past.length ? past[past.length - 1] : r.start;
 }
 function recMenu(r, date, where) {
-  const k = `${r.id}|${where}`, open = ui.menuRec === k;
+  const k = `${r.id}|${where}|${date}`, open = ui.menuRec === k;
+  let extra = '';
+  if (open && (where === 'day' || where === 'up')) {
+    const paid = isPaid(r.id, date), late = !paid && date < today, it = (act, label, cls = '') => `<button role="menuitem" ${cls ? `class="${cls}"` : ''} data-act="${act}" data-rec="${r.id}" data-d="${date}">${label}</button>`;
+    if (paid) extra = r.auto ? '' : it('unpay', 'Undo paid');
+    else {
+      if (!r.auto) extra += it(isRange(r) ? 'pay-ask' : 'paid', late ? 'Log now' : 'Mark paid');
+      extra += it('delay', 'Delay');
+    }
+    const mk = Object.keys(r.moved || {}).find(o => r.moved[o] === date);
+    if (mk) extra += it('undelay', 'Undo delay');
+  }
   return `<div class="menuwrap"><button class="btn ghost sm" data-act="rec-menu" data-k="${k}" aria-label="Options for ${esc(r.name)}" aria-haspopup="menu" aria-expanded="${open}" style="padding:4px 8px"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg></button>
-    ${open ? `<div class="menu" role="menu"><button role="menuitem" data-act="rec-edit" data-id="${r.id}" data-d="${date}" data-from="${where}">Edit</button><button role="menuitem" class="danger" data-act="rec-del" data-id="${r.id}" data-d="${date}">Delete</button></div>` : ''}</div>`;
+    ${open ? `<div class="menu" role="menu">${extra}<button role="menuitem" data-act="rec-edit" data-id="${r.id}" data-d="${date}" data-from="${where}">Edit</button><button role="menuitem" class="danger" data-act="rec-del" data-id="${r.id}" data-d="${date}">Delete</button></div>` : ''}</div>`;
 }
 function recVals(r) {
-  const a = parseFloat(r.amount), mx = parseFloat(r.amountMax), n = r.name.trim();
+  const a = numf(r.amount), mx = numf(r.amountMax), n = r.name.trim();
   if (!n) return { err: 'Enter a name.' };
   if (!(a > 0)) return { err: 'Enter an amount.' };
   if (r.varies && !(mx > a)) return { err: 'Highest must be above lowest.' };
@@ -951,9 +971,9 @@ function recModal() {
     <form class="f" data-form="rec">
       <label style="grid-column:1/-1">Name<input data-rf="name" value="${esc(r.name)}" maxlength="40" required></label>
       ${r.varies
-        ? `<label>Lowest<input data-rf="amount" type="number" step="${amtStep()}" min="0" inputmode="decimal" value="${esc(r.amount)}" required></label><label>Highest<input data-rf="amountMax" type="number" step="${amtStep()}" min="0" inputmode="decimal" value="${esc(r.amountMax)}" required></label>`
-        : `<label style="grid-column:1/-1">Amount<input data-rf="amount" type="number" step="${amtStep()}" min="0" inputmode="decimal" value="${esc(r.amount)}" required></label>`}
-      <label class="check" style="grid-column:1/-1"><input type="checkbox" data-rf="varies" ${isRange(r) ? 'checked' : ''}> Relative amount (varies each time)</label>
+        ? `<label>Lowest<input data-rf="amount" type="text" inputmode="decimal" autocomplete="off" value="${esc(r.amount)}" required></label><label>Highest<input data-rf="amountMax" type="text" inputmode="decimal" autocomplete="off" value="${esc(r.amountMax)}" required></label>`
+        : `<label style="grid-column:1/-1">Amount<input data-rf="amount" type="text" inputmode="decimal" autocomplete="off" value="${esc(r.amount)}" required></label>`}
+      <label class="check" style="grid-column:1/-1"><input type="checkbox" data-rf="varies" ${r.varies ? 'checked' : ''}> Relative amount (varies each time)</label>
       <label>Category<select data-rf="cat">${catOpts(r.cat)}</select></label>
       <label>Repeats<select data-rf="freq">${opt('daily', 'Daily', r.freq)}${opt('weekly', 'Weekly', r.freq)}${opt('biweekly', 'Every 2 weeks', r.freq)}${opt('monthly', 'Monthly', r.freq)}${opt('yearly', 'Yearly', r.freq)}${opt('custom', 'Custom', r.freq)}${opt('once', 'Once', r.freq)}</select></label>
       ${r.freq === 'custom' ? `<div style="grid-column:1/-1;display:flex;gap:10px;align-items:end"><label style="width:90px">Every<input data-rf="every" type="number" min="1" step="1" inputmode="numeric" value="${esc(r.every)}"></label>
@@ -961,7 +981,7 @@ function recModal() {
         ${r.unit === 'week' ? `<div class="chips" style="grid-column:1/-1">${WD.map((w, i) => ch(r.weekdays, i, 'rec-wd', w)).join('')}</div>` : ''}
         ${r.unit === 'month' ? `<label style="grid-column:1/-1">On days of the month (optional)<input data-rf="monthDays" value="${esc(r.monthDays)}" placeholder="e.g. 1, 15"></label>` : ''}
         ${r.unit === 'year' ? `<div class="chips" style="grid-column:1/-1">${MO.map((w, i) => ch(r.months, i, 'rec-mo', w)).join('')}</div>` : ''}` : ''}
-      <div style="grid-column:1/-1"><label>Payment<select data-rf="auto">${opt('manual', 'Manual, I mark it paid', r.auto)}<option value="auto" class="${isRange(r) ? 'dim' : ''}" ${r.auto === 'auto' ? 'selected' : ''}>Automatic, log on due date${isRange(r) ? ' (not available)' : ''}</option></select></label>
+      <div style="grid-column:1/-1"><label>Payment<select data-rf="auto">${opt('manual', 'Manual, I mark it paid', r.auto)}<option value="auto" class="${r.varies ? 'dim' : ''}" ${r.auto === 'auto' ? 'selected' : ''}>Automatic, log on due date${r.varies ? ' (not available)' : ''}</option></select></label>
         ${blocked ? `<div class="small neg" style="margin-top:4px">Automatic can't be used with a relative amount. Choose Manual or untick Relative amount.</div>` : ''}</div>
       <div style="grid-column:1/-1;display:flex;flex-direction:column;gap:10px">${colorBlock(r)}</div>
       <div class="secwrap" style="grid-column:1/-1"><button type="button" class="sechead" data-act="sec-toggle" data-sec="recdates" aria-expanded="${!closed}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><span>Dates</span><span class="count">${dates ? dates + ' set' : 'Optional'}</span></button>
@@ -1006,6 +1026,8 @@ function updateNav() {
 }
 function placeInd(instant) {
   const nav = app.querySelector('nav'), ind = nav && nav.querySelector('.ind'), cur = nav && nav.querySelector('.navrow [aria-current]'); if (!ind || !cur) return;
+  if (!instant && ind._el === cur) return;
+  ind._el = cur;
   if (instant) ind.style.transition = 'none';
   ind.style.width = cur.offsetWidth + 'px'; ind.style.transform = `translateX(${cur.offsetLeft}px)`;
   if (instant) { void ind.offsetWidth; ind.style.transition = ''; }
@@ -1026,10 +1048,10 @@ function render() {
   const oldModal = app.querySelector('.modal'), keep = oldModal ? oldModal.scrollTop : 0, keepNav = app.querySelector('nav'), prevLabels = new Set([...app.querySelectorAll('.modal')].map(m => m.getAttribute('aria-label')));
   const showMonth = ['overview', 'activity', 'budgets'].includes(ui.tab);
   const view = { overview: vOverview, activity: vActivity, budgets: vBudgets, calendar: vCalendar, goals: vGoals, split: vSplit }[ui.tab]();
-  app.innerHTML = `
+  const html = `
     <div class="top"><h1>Pocket Ledger</h1>
       <button class="btn iconbtn" data-act="cfg" aria-label="Settings"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
-    <nav></nav>
+    ${keepNav ? '' : '<nav></nav>'}
     ${showMonth ? `<div class="monthrow">${monthNav(ui.month, 'm')}</div>` : ''}
     ${dueBanner()}
     ${S.sample ? `<div class="banner"><span>You are looking at sample data.</span><button class="btn sm" data-act="fresh">Start fresh</button></div>` : ''}
@@ -1043,10 +1065,11 @@ function render() {
     ${ui.delay ? delayModal() : ''}
     ${ui.reopen ? reopenModal() : ''}
     ${ui.catModal ? catModal() : ''}`;
+  if (keepNav) { [...app.children].forEach(c => { if (c !== keepNav) c.remove(); }); app.insertAdjacentHTML('afterbegin', html); }
+  else app.innerHTML = html;
   app.querySelectorAll('form').forEach(fm => { fm.noValidate = true; });
   app.classList.toggle('enter', lastTab !== null && lastTab !== ui.tab); lastTab = ui.tab;
   app.querySelectorAll('.overlay').forEach(o => { const m = o.querySelector('.modal'); if (m && !prevLabels.has(m.getAttribute('aria-label'))) o.classList.add('fresh'); });
-  if (keepNav) app.querySelector('nav').replaceWith(keepNav);
   updateNav();
   if (ui.justDone) requestAnimationFrame(() => { const el = app.querySelector('.card.just'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); });
   const nm = app.querySelector('.modal'); if (nm && oldModal) nm.scrollTop = keep;
@@ -1061,7 +1084,7 @@ const closeMenus = e => {
   app.querySelectorAll('[aria-haspopup=menu]').forEach(x => x.setAttribute('aria-expanded', 'false'));
 };
 ['pointerdown', 'touchstart', 'mousedown'].forEach(t => document.addEventListener(t, closeMenus, { capture: true, passive: true }));
-const UI_ONLY = new Set(['tab','day','mprev','mnext','cprev','cnext','cat-open','cat-close','cat-pick','cat-type','col-pick','col-more','cfg','cfg-close','cat-menu','rec-menu','rec-list','rec-open','rec-close','rec-back','tabs-edit','tabs-close','pay-ask','pay-cancel','delay','delay-quick','delay-close','reopen-close','tx-edit','tx-close','scope-close','goal-detail','cat-detail','hist-more','due-open']);
+const UI_ONLY = new Set(['ov-chart','tab','day','mprev','mnext','cprev','cnext','cat-open','cat-close','cat-pick','cat-type','col-pick','col-more','cfg','cfg-close','cat-menu','rec-menu','rec-list','rec-open','rec-close','rec-back','tabs-edit','tabs-close','pay-ask','pay-cancel','delay','delay-quick','delay-close','reopen-close','tx-edit','tx-close','scope-close','goal-detail','cat-detail','hist-more','due-open']);
 app.addEventListener('click', e => {
   if (nd.just) return;
   if (ui.more && !e.target.closest('nav')) { ui.more = false; updateNav(); }
@@ -1070,6 +1093,7 @@ app.addEventListener('click', e => {
   if (!b) { if ((ui.menuCat || ui.menuRec) && !e.target.closest('.menuwrap')) { ui.menuCat = null; ui.menuRec = null; ui.delCat = null; render(); } return; }
   const a = b.dataset.act, d = b.dataset;
   if ((ui.menuCat || ui.menuRec) && !e.target.closest('.menuwrap')) { ui.menuCat = null; ui.menuRec = null; }
+  if (a === 'paid' || a === 'pay-ask' || a === 'delay' || a === 'unpay' || a === 'undelay') ui.menuRec = null;
   if (a !== 'del-cat') ui.delCat = null;
   if (a !== 'del-goal') ui.delGoal = null;
   if (a !== 'goal-done') ui.justDone = null;
@@ -1090,6 +1114,7 @@ app.addEventListener('click', e => {
     return;
   }
   else if (a === 'cat-type') { ui.cat.type = d.t; ui.cat.err = ''; }
+  else if (a === 'ov-chart') ui.ovChart = d.m;
   else if (a === 'cat-menu') ui.menuCat = ui.menuCat === d.c ? null : d.c;
   else if (a === 'cat-edit') {
     const col = catColor(d.c); ui.menuCat = null; ui.catModal = true;
@@ -1183,12 +1208,13 @@ app.addEventListener('click', e => {
     try { navigator.clipboard.writeText(txt).then(() => note('Copied.'), fallback); } catch (err) { fallback(); }
     return;
   }
-  if (UI_ONLY.has(a) || a.startsWith('sub-')) render(); else commit();
+  if (a === 'tab') { updateNav(); render(); }
+  else if (UI_ONLY.has(a) || a.startsWith('sub-')) render(); else commit();
 });
 
 app.addEventListener('submit', e => {
   e.preventDefault();
-  const f = e.target, fd = new FormData(f), kind = f.dataset.form, v = n => (fd.get(n) || '').toString().trim();
+  const f = e.target, fd = new FormData(f), kind = f.dataset.form, v = n => { const x = (fd.get(n) || '').toString().trim(); return ['amount', 'target', 'saved'].includes(n) ? x.replace(',', '.') : x; };
   for (const el of f.querySelectorAll('[required]')) if (!String(el.value).trim()) { el.focus(); return; }
   if (kind === 'tx') {
     if (!(+v('amount') > 0)) return;
@@ -1216,7 +1242,7 @@ app.addEventListener('submit', e => {
     if (t) { Object.assign(t, { goal: undefined, dir: undefined }, parseCat(v('cat'))); t.amount = +v('amount'); t.date = v('date'); t.note = v('note'); }
     ui.tx = null;
   } else if (kind === 'cat') {
-    const c = ui.cat, n = c.name.trim(), lim = parseFloat(c.limit);
+    const c = ui.cat, n = c.name.trim(), lim = numf(c.limit);
     if (!n) c.err = 'Pick a preset or type a name.';
     else if (n !== c.editing && (S.cats.includes(n) || S.incCats.includes(n))) c.err = 'That category already exists.';
     else {
@@ -1319,7 +1345,7 @@ app.addEventListener('pointermove', e => {
   if (!nd.drag) { if (Math.abs(dx) < 6) return; nd.drag = true; nd.nav.classList.add('drag'); try { nd.nav.setPointerCapture(nd.pid); } catch (err) {} }
   const bs = [...nd.nav.querySelectorAll('.navrow button')], lo = bs[0].offsetLeft, hi = bs[bs.length - 1].offsetLeft + bs[bs.length - 1].offsetWidth - nd.w;
   nd.x = Math.min(hi, Math.max(lo, nd.ox + dx));
-  nd.ind.style.transform = `translateX(${nd.x}px) scale(1.07)`;
+  nd.ind._el = null; nd.ind.style.transform = `translateX(${nd.x}px) scale(1.07)`;
   const mid = nd.x + nd.w / 2, h = bs.find(b => mid >= b.offsetLeft && mid < b.offsetLeft + b.offsetWidth) || nd.hov;
   if (h !== nd.hov) nd.hov = h;
   bs.forEach(b => b.classList.toggle('hov', b === h));
