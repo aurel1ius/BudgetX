@@ -1,5 +1,5 @@
 // Pocket Ledger service worker: cache the app so it opens offline, refresh it in the background.
-const CACHE = 'pocket-ledger-v16';
+const CACHE = 'pocket-ledger-v27';
 const CORE = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
@@ -18,4 +18,9 @@ self.addEventListener('fetch', e => {
     const res = await net;
     return res || (req.mode === 'navigate' ? cache.match('index.html') : Response.error());
   }));
+});
+
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(cs => cs.length ? cs[0].focus() : self.clients.openWindow('./')));
 });
