@@ -821,7 +821,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Pocket Ledger · version 38</div>`);
+    <div class="small muted" style="text-align:center">Pocket Ledger · version 39</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -1407,7 +1407,10 @@ render();
 
 <script>
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(reg => {
+    reg.update().catch(() => {});
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update().catch(() => {}); });
+  }).catch(() => {}));
 }
 try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
 </script>
