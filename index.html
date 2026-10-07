@@ -791,7 +791,7 @@ function vGoals() {
     return `<div class="card" style="position:relative;z-index:${ui.menuRec && open ? 6 : 'auto'}"><div class="row"><h3>${esc(g.name)}</h3>${delBtn(g)}</div>
       <div class="row"><span class="amt">${esc(fmt0(sv))} <span class="muted" style="font-weight:400">of ${esc(fmt0(g.target))}</span></span><span class="small muted">${Math.round(pct)}%</span></div>
       <div class="bar"><i style="width:${pct}%"></i></div><div class="small muted">${esc(hint)}</div>
-      <form class="f" data-form="contrib" data-id="${g.id}"><label>Move money<input name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 50 in, -20 out" required></label><button class="btn" type="submit">Move</button></form>
+      <form class="f" data-form="contrib" data-id="${g.id}"><div style="grid-column:1/-1"><div class="small muted" style="margin-bottom:4px">Move money</div><div class="chips" role="group" aria-label="Direction"><button type="button" class="btn sm primary" data-act="move-dir" data-m="dep" aria-pressed="true">Put in</button><button type="button" class="btn sm" data-act="move-dir" data-m="wd" aria-pressed="false">Take out</button></div><input type="hidden" name="dir" value="dep"></div><label>Amount<input name="amount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 50" required></label><button class="btn" type="submit">Move</button></form>
       <div style="display:flex;gap:8px;flex-wrap:wrap">${showBtn(g, open)}<button class="btn sm" data-act="goal-done" data-id="${g.id}">${star().replace('class="star "', 'class="star" style="margin:0 6px 0 0"')}Completed</button></div>
       ${open ? goalDetail(g) : ''}</div>`;
   }).join('');
@@ -860,7 +860,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Goblin · v1.1.6</div>`);
+    <div class="small muted" style="text-align:center">Goblin · v1.1.7</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -1157,6 +1157,10 @@ app.addEventListener('click', e => {
     return;
   }
   else if (a === 'cat-type') { ui.cat.type = d.t; ui.cat.err = ''; }
+  else if (a === 'move-dir') {
+    const fm = b.closest('form'); if (fm) { fm.querySelector('[name=dir]').value = d.m; fm.querySelectorAll('[data-act=move-dir]').forEach(x => { const on = x.dataset.m === d.m; x.classList.toggle('primary', on); x.setAttribute('aria-pressed', String(on)); }); }
+    return;
+  }
   else if (a === 'ov-chart') {
     ui.ovChart = d.m;
     const card = app.querySelector('#ovcard'); if (card) {
@@ -1326,7 +1330,7 @@ app.addEventListener('submit', e => {
       else ui.scope = { mode: 'edit', id: o.id, date: r.editing.date };
     } else { S.recurring.push(Object.assign({ id: uid() }, res.v)); ui.recModal = 'list'; ui.rec = null; }
   } else if (kind === 'goal') S.goals.push({ id: uid(), name: v('name'), target: +v('target'), saved: +v('saved') || 0, deadline: v('deadline') || undefined });
-  else if (kind === 'contrib') { const g = goalOf(f.dataset.id), am = +v('amount'); if (g && am) { const amt = am < 0 ? Math.min(-am, Math.max(0, goalSaved(g))) : am; if (amt > 0) S.txns.push({ id: uid(), type: 'saving', dir: am < 0 ? 'wd' : 'dep', goal: g.id, cat: g.name, amount: amt, date: today, note: '' }); } }
+  else if (kind === 'contrib') { const g = goalOf(f.dataset.id), raw = +v('amount'), am = raw && v('dir') === 'wd' ? -Math.abs(raw) : raw; if (g && am) { const amt = am < 0 ? Math.min(-am, Math.max(0, goalSaved(g))) : am; if (amt > 0) S.txns.push({ id: uid(), type: 'saving', dir: am < 0 ? 'wd' : 'dep', goal: g.id, cat: g.name, amount: amt, date: today, note: '' }); } }
   else if (kind === 'person') S.people.push({ id: 'p_' + uid(), name: v('name') });
   else if (kind === 'split') {
     const w = fd.getAll('with'); if (!w.length || !(+v('amount') > 0)) return;
