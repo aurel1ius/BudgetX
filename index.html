@@ -860,7 +860,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Goblin · v1.0.5</div>`);
+    <div class="small muted" style="text-align:center">Goblin · v1.1.6</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
@@ -959,19 +959,30 @@ function fromRec(o, date, from) {
   const col = o.color || (o.type === 'income' ? '#0e7c66' : isSav(o) ? '#5b7fd6' : '#d1495b');
   return Object.assign({ name: o.name, amount: String(o.amount), amountMax: o.amountMax ? String(o.amountMax) : '', varies: o.amountMax > o.amount, cat: catKey(o), freq: o.freq, every: String(o.every || 1), unit: o.unit || 'week', weekdays: (o.weekdays || []).slice(), monthDays: (o.monthDays || []).join(', '), months: (o.months || []).slice(), start: o.start, end: o.end || '', auto: o.auto ? 'auto' : 'manual', color: col, more: false, err: '', editing: { id: o.id, date }, from }, hexHsl(col));
 }
+/* Carry a recurring-payment edit over to copies already logged in Activity. Amounts the user changed by hand are kept. */
+function syncLogged(txs, oldAmount, v) {
+  txs.forEach(t => {
+    if (round2(t.amount) === round2(oldAmount)) t.amount = v.amount;
+    t.note = v.name; t.type = v.type; t.cat = v.cat; t.goal = v.goal; t.dir = v.dir;
+  });
+}
 function applyEdit(scope) {
   const f = ui.rec, D = f.editing.date, o = S.recurring.find(x => x.id === f.editing.id), res = recVals(f); if (!o || res.err) return;
   const v = res.v, strip = { every: undefined, unit: undefined, weekdays: undefined, monthDays: undefined, months: undefined }, moved = v.start !== o.start;
   if (scope === 'future' && D <= o.start) scope = 'all';
+  const oldAmt = o.amount;
+  if (scope === 'all') syncLogged(S.txns.filter(t => t.recId === o.id), oldAmt, v);
   if (scope === 'all') S.recurring[S.recurring.indexOf(o)] = Object.assign({}, strip, v, { id: o.id, autoThrough: v.auto && !o.auto ? dayBefore(today) : o.autoThrough, skip: o.skip, moved: o.moved });
   else if (scope === 'future') {
     const n = Object.assign({}, strip, v, { id: uid(), start: moved ? v.start : D, autoThrough: v.auto && !o.auto ? dayBefore(today) : o.autoThrough, skip: (o.skip || []).filter(x => x >= D) }), cut = dayBefore(D);
     o.end = o.end && o.end < cut ? o.end : cut;
-    S.txns.forEach(t => { if (t.recId === o.id && t.date >= D) t.recId = n.id; });
+    const mv = S.txns.filter(t => t.recId === o.id && t.date >= D); mv.forEach(t => { t.recId = n.id; }); syncLogged(mv, oldAmt, v);
     S.recurring.push(n);
   } else {
     o.skip = (o.skip || []).concat(D);
-    S.recurring.push(Object.assign({}, strip, v, { id: uid(), freq: 'once', start: moved ? v.start : D, end: undefined, auto: isPaid(o.id, D) ? false : v.auto, autoThrough: v.auto ? dayBefore(today) : undefined }));
+    const nid = uid(), logged = S.txns.filter(t => t.recId === o.id && t.date === D);
+    S.recurring.push(Object.assign({}, strip, v, { id: nid, freq: 'once', start: moved ? v.start : D, end: undefined, auto: isPaid(o.id, D) ? false : v.auto, autoThrough: v.auto ? dayBefore(today) : undefined }));
+    if (!moved) { syncLogged(logged, oldAmt, v); logged.forEach(t => { t.recId = nid; }); }
   }
 }
 function applyDelete(scope) {
