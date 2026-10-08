@@ -625,9 +625,9 @@ function txMenu(t, where) {
     ${open ? `<div class="menu" role="menu"><button role="menuitem" data-act="tx-edit" data-id="${t.id}">Edit</button><button role="menuitem" class="danger" data-act="tx-del" data-id="${t.id}">Delete</button></div>` : ''}</div>`;
 }
 function txRow(t, where, showDate) {
-  const sub = isSav(t) ? `Savings · ${t.dir === 'wd' ? 'from' : 'to'} ${goalName(t)}` : t.cat;
+  const wd = isSav(t) && t.dir === 'wd', sub = isSav(t) ? (wd ? `Moved to main account · from ${goalName(t)}` : `Savings · to ${goalName(t)}`) : t.cat;
   return `<div class="item rec"><span class="dot" style="background:${esc(txColor(t))}"></span>
-    <div class="grow"><div class="clip1" data-act="note-toggle">${esc(t.note || (isSav(t) ? goalName(t) : t.cat))}</div><div class="small muted">${esc(sub)}${showDate ? ' · ' + esc(dayLabel(t.date)) : ''}${t.recId ? ' · recurring' : ''}</div></div>
+    <div class="grow"><div class="clip1" data-act="note-toggle">${esc(t.note || (isSav(t) ? (wd ? 'Taken out of ' : 'Put into ') + goalName(t) : t.cat))}</div><div class="small muted">${esc(sub)}${showDate ? ' · ' + esc(dayLabel(t.date)) : ''}${t.recId ? ' · recurring' : ''}</div></div>
     <span class="amt ${amtCls(t)}">${sgn(t)}${esc(fmt(t.amount))}</span>${txMenu(t, where)}</div>`;
 }
 function payModal() {
@@ -674,7 +674,7 @@ function txModal() {
       <button class="btn primary" type="submit">Save changes</button>
     </form></div></div>`;
 }
-const txSearchText = t => `${t.note || ''} ${isSav(t) ? 'savings saving ' + goalName(t) : t.cat} ${t.amount} ${fmt(t.amount)} ${t.date} ${dayLabel(t.date)}`.toLowerCase();
+const txSearchText = t => `${t.note || ''} ${isSav(t) ? 'savings saving taken out put into ' + goalName(t) : t.cat} ${t.amount} ${fmt(t.amount)} ${t.date} ${dayLabel(t.date)}`.toLowerCase();
 function actList() {
   const q = ui.q.trim().toLowerCase();
   let list, title, html = '', last = '';
@@ -860,7 +860,7 @@ function vSettings() {
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px"><button class="btn sm" data-act="copy">Copy data</button><button class="btn sm" data-act="sub-export">See backup data</button><button class="btn sm" data-act="sub-import">Paste backup</button></div>
       <div class="small muted" id="copied" style="margin-top:6px"></div></div>
     <div><button class="btn sm danger" data-act="reset">${ui.confirmReset ? 'Tap again to erase everything' : 'Erase all data'}</button></div>
-    <div class="small muted" style="text-align:center">Goblin · v1.1.7</div>`);
+    <div class="small muted" style="text-align:center">Goblin · v1.1.8</div>`);
 }
 
 const COLORS = ['#0e7c66', '#e07a3f', '#5b7fd6', '#c9a227', '#b455a0', '#3aa6b9', '#7a8b3c', '#d1495b', '#7c6f64', '#8b5cf6', '#ec4899', '#14b8a6'];
